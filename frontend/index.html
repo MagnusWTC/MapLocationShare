@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>地图位置共享</title>
+    <script type="text/javascript">
+      window._AMapSecurityConfig = {
+        securityJsCode: '%VITE_AMAP_SECURITY_CODE%',
+      }
+    </script>
+    <script src="https://webapi.amap.com/maps?v=2.0&key=%VITE_AMAP_KEY%&securityJsCode=%VITE_AMAP_SECURITY_CODE%"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

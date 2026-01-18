@@ -1,0 +1,218 @@
+.share-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: white;
+  color: #667eea;
+  border: 2px solid #667eea;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.share-button:hover:not(:disabled) {
+  background: #667eea;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.share-button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.share-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.share-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.share-button-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(102, 126, 234, 0.3);
+  border-top-color: #667eea;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.share-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.share-modal {
+  background: white;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.share-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.share-modal-header h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #1a202c;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+  color: #718096;
+  transition: color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.close-button:hover {
+  color: #1a202c;
+}
+
+.close-button svg {
+  width: 24px;
+  height: 24px;
+}
+
+.share-modal-body {
+  padding: 1.5rem;
+}
+
+.share-description {
+  color: #4a5568;
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.share-url-container {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.share-url-input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  color: #4a5568;
+  background: #f7fafc;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.share-url-input:focus {
+  border-color: #667eea;
+}
+
+.copy-button {
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  white-space: nowrap;
+}
+
+.copy-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.copy-button.copied {
+  background: #48bb78;
+}
+
+.check-icon {
+  width: 16px;
+  height: 16px;
+}
+
+.share-tips {
+  background: #f7fafc;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.share-tips h3 {
+  margin: 0 0 0.75rem 0;
+  font-size: 1rem;
+  color: #2d3748;
+}
+
+.share-tips ul {
+  margin: 0;
+  padding-left: 1.25rem;
+  color: #4a5568;
+  font-size: 0.9rem;
+  line-height: 1.8;
+}
+
+.share-tips li {
+  margin-bottom: 0.25rem;
+}
