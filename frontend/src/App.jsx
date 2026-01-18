@@ -15,8 +15,13 @@ function App() {
     const urlParams = new URLSearchParams(window.location.search)
     const sharedSessionId = urlParams.get('session')
 
-    const newUserId = 'user_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9)
-    setUserId(newUserId)
+    // 从本地存储获取用户ID，如果不存在则生成新的
+    let storedUserId = localStorage.getItem('map_location_user_id')
+    if (!storedUserId) {
+      storedUserId = 'user_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9)
+      localStorage.setItem('map_location_user_id', storedUserId)
+    }
+    setUserId(storedUserId)
 
     if (sharedSessionId) {
       setSessionId(sharedSessionId)
@@ -27,7 +32,7 @@ function App() {
       let lastAccurateLocation = null
       let locationAttempts = 0
       const maxAttempts = 5
-      const accuracyThreshold = 100 // 只接受精度优于100米的位置
+      const accuracyThreshold = 200 // 只接受精度优于200米的位置
 
       const updateLocation = (position) => {
         const { latitude, longitude, accuracy, heading } = position.coords
@@ -52,7 +57,7 @@ function App() {
         }
 
         const location = {
-          userId: newUserId,
+          userId: storedUserId,
           latitude: finalLatitude,
           longitude: finalLongitude,
           heading: heading || 0,

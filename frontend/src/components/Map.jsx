@@ -79,20 +79,25 @@ function Map({ userLocation, otherLocations, userId, sessionId, onLocationUpdate
       const isCurrentUser = location.userId === userId
       const marker = new AMap.Marker({
         position: [location.longitude, location.latitude],
-        title: isCurrentUser ? '我的位置' : '其他用户',
-        icon: isCurrentUser ? createCustomIcon('#667eea', true) : createCustomIcon('#e53e3e', false),
-        animation: 'AMAP_ANIMATION_DROP'
+        title: isCurrentUser ? '我的位置' : `用户 ${location.userId.substring(0, 8)}`,
+        icon: createCustomIcon(
+          isCurrentUser ? '#667eea' : getRandomColor(location.userId), 
+          isCurrentUser
+        ),
+        animation: 'AMAP_ANIMATION_DROP',
+        zIndex: isCurrentUser ? 100 : 50
       })
 
       const infoWindow = new AMap.InfoWindow({
         content: `
           <div style="padding: 10px; min-width: 150px;">
             <h3 style="margin: 0 0 8px 0; font-size: 16px; color: #333;">
-              ${isCurrentUser ? '我的位置' : '其他用户'}
+              ${isCurrentUser ? '我的位置' : `用户 ${location.userId.substring(0, 8)}`}
             </h3>
             <p style="margin: 0; font-size: 14px; color: #666;">
               纬度: ${location.latitude.toFixed(6)}<br/>
-              经度: ${location.longitude.toFixed(6)}
+              经度: ${location.longitude.toFixed(6)}<br/>
+              精度: ${location.accuracy ? location.accuracy.toFixed(0) : '未知'}米
             </p>
           </div>
         `,
@@ -147,6 +152,17 @@ function Map({ userLocation, otherLocations, userId, sessionId, onLocationUpdate
     }
   }, [userLocation, sessionId, userId])
 
+  // 基于userId生成一致的随机颜色
+  const getRandomColor = (userId) => {
+    // 简单的哈希函数，基于userId生成一个0-359的色相值
+    let hash = 0
+    for (let i = 0; i < userId.length; i++) {
+      hash = userId.charCodeAt(i) + ((hash << 5) - hash)
+    }
+    const hue = Math.abs(hash % 360)
+    return `hsl(${hue}, 70%, 60%)`
+  }
+
   const createCustomIcon = (color, isCurrentUser) => {
     return new AMap.Icon({
       size: new AMap.Size(32, 32),
@@ -159,8 +175,6 @@ function Map({ userLocation, otherLocations, userId, sessionId, onLocationUpdate
       imageSize: new AMap.Size(32, 32)
     })
   }
-
-
 
   return (
     <div className="map-container">
